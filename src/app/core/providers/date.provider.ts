@@ -1,5 +1,5 @@
-import { provideHlmDatePickerConfig, provideHlmDatePickerMultiConfig, provideHlmDateRangePickerConfig } from '@helm/date-picker';
-import { provideBrnCalendarI18n, type BrnCalendarI18n, type MonthLabels } from '@brain/calendar';
+import { provideHlmDatePickerConfig, provideHlmDatePickerMultiConfig, provideHlmDateRangePickerConfig } from '@spartan-ng/helm/date-picker';
+import { provideBrnCalendarI18n, type BrnCalendarI18n, type MonthLabels } from '@spartan-ng/brain/calendar';
 
 import { DateTime } from 'luxon';
 import { Provider } from '@angular/core';
@@ -29,8 +29,8 @@ export const calendarI18nConfig: BrnCalendarI18n = {
 
 /** Formato del rango de fechas: "dd/MM/yyyy - dd/MM/yyyy" (con placeholder si falta alguno). */
 export const dateRangePickerConfig = {
-    formatDates: ([start, end]: [Date | undefined, Date | undefined]) => {
-        const fmt = (d: Date | undefined) => (d ? formatDate(d) : 'DD/MM/AAAA');
+    formatDates: ([start, end]: [Date | null | undefined, Date | null | undefined]) => {
+        const fmt = (d: Date | null | undefined) => (d ? formatDate(d) : 'DD/MM/AAAA');
         return `${fmt(start)} - ${fmt(end)}`;
     },
 };

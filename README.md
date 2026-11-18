@@ -12,6 +12,24 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
+## Componentes de UI (spartan.ng)
+
+El portal usa [spartan.ng](https://spartan.ng) oficial:
+
+- `@spartan-ng/brain` (dependencia de npm) aporta el comportamiento y la accesibilidad. Al ser una
+  dependencia, Native Federation la comparte con los micro front ends.
+- Los componentes `helm` (estilos) viven en `libs/ui/<componente>` y se importan con el alias
+  `@spartan-ng/helm/<componente>` (ver `tsconfig.json` y `components.json`). Incluyen los ajustes del
+  sistema de diseño del portal (sidebar flotante, badge `tertiary`, botón e input).
+
+Para agregar un componente nuevo:
+
+```bash
+npx ng g @spartan-ng/cli:ui <componente> --directory=libs/ui
+```
+
+Las pruebas de `libs/ui` están en `src/testing/spartan/` y su cobertura se mide junto con la de `src/app`.
+
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:

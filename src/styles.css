@@ -4,7 +4,7 @@
 @import 'tailwindcss/preflight.css' layer(base);
 @import 'tailwindcss/utilities.css';
 
-@import '../libs/brain/hlm-tailwind-preset.css';
+@import '@spartan-ng/brain/hlm-tailwind-preset.css';
 
 @font-face {
   font-family: "Prospero";
@@ -72,6 +72,9 @@
 
   --color-surface: var(--surface);
   --color-surface-foreground: var(--surface-foreground);
+  /* Variante "tertiary" (badge del rol en el header). */
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-foreground: var(--tertiary-foreground);
 
   /* Custom palette colors */
   --color-acento: #2569B3;

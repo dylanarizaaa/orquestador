@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Sidebar } from '../../shared/components/sidebar/sidebar';
-import { HlmSidebarImports } from '@helm/sidebar';
+import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
 import { Header } from 'src/app/shared/components/header/header';
 
 @Component({

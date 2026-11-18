@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, Signal, computed, inject } from '@a
 import { RouterModule } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideChevronDown, lucideChevronLeft } from '@ng-icons/lucide';
-import { HlmCollapsibleImports } from '@helm/collapsible';
-import { HlmSidebarImports } from '@helm/sidebar';
+import { HlmCollapsibleImports } from '@spartan-ng/helm/collapsible';
+import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
 import { RoleMenu } from '../../../core/models/menu.model';
 import { SidebarItem, SidebarSubItem } from './sidebar.model';
 import { barLineChartIcon, electronicInvoicingIcon, historicalIcon } from 'src/app/core/config/icons';

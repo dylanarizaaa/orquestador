@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideLogOut, lucideUser } from '@ng-icons/lucide';
-import { HlmBadge } from '@helm/badge';
+import { HlmBadge } from '@spartan-ng/helm/badge';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
