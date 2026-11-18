@@ -45,8 +45,13 @@ export class RemoteLoaderService {
                 }
             });
 
-            // Escuchar los eventos de éxito o error
+            // Escuchar los eventos de éxito o error. Si falla, se quita el elemento para que una
+            // carga posterior (p. ej. al volver a entrar a la ruta) lo intente de nuevo.
             element.onload = () => resolve();
+            element.onerror = () => {
+                element.remove();
+                reject(new Error(`No se pudo cargar el recurso [${config.id}].`));
+            };
 
             // Inyectar en el DOM (en el <head> o en el <body>)
             const targetElement = config.targetNode === 'body' ? document.body : document.head;

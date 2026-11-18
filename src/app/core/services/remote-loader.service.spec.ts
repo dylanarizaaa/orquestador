@@ -102,4 +102,17 @@ describe('RemoteLoaderService', () => {
     expect(spy).toHaveBeenCalledTimes(2);
     expect(result).toEqual([undefined, undefined]);
   });
+
+  it('rejects and removes the element when the resource fails to load', async () => {
+    const promise = service.loadResource({
+      id: 'res-error',
+      tag: 'link',
+      attributes: { rel: 'stylesheet', href: 'missing.css', 'data-test-resource': 'true' },
+    });
+
+    document.getElementById('res-error')?.dispatchEvent(new Event('error'));
+
+    await expect(promise).rejects.toThrow('No se pudo cargar el recurso [res-error].');
+    expect(document.getElementById('res-error')).toBeNull();
+  });
 });

@@ -7,8 +7,7 @@ import { loadRemoteModule } from '@angular-architects/native-federation';
 import { provideRouter } from '@angular/router';
 import { authGuard } from './app/core/guards/auth.guard';
 import { roleGuard } from './app/core/guards/role.guard';
-import { RemoteLoaderService } from './app/core/services/remote-loader.service';
-import { inject, provideAppInitializer } from '@angular/core';
+import { loadRemoteStyles } from './app/core/config/remote-styles';
 
 registerSpanishLocale();
 
@@ -22,7 +21,7 @@ interface IAppConfig {
     styles: Record<string, string>;
 }
 
-const getAppConfig = () => {
+const getAppConfig = (): Promise<IAppConfig> => {
     return Promise.resolve({
         "providers": {
             "factura-pendiente": "./Providers"
@@ -94,17 +93,17 @@ const initApp = async () => {
                         children: config.routes.map(route => ({
                             path: route.path,
                             canActivate: [roleGuard],
-                            loadChildren: () => loadRemoteModule(route.remoteName, route.exposedModule).then((m) => m.default)
+                            // Los estilos del micro front se cargan al entrar a su ruta (no todos al
+                            // arrancar) y se espera a que estén listos antes de mostrar la pantalla.
+                            loadChildren: () => {
+                                const styles = loadRemoteStyles(route.remoteName, config.styles[route.remoteName]);
+                                return styles
+                                    .then(() => loadRemoteModule(route.remoteName, route.exposedModule))
+                                    .then((m) => m.default);
+                            }
                         }))
                     }
                 ]),
-                provideAppInitializer((rl = inject(RemoteLoaderService)) => {
-                    rl.loadAll(Object.entries(config.styles).map(([key, value]) => ({
-                        id: key,
-                        tag: 'link',
-                        attributes: { rel: "stylesheet", href: value }
-                    })));
-                }),
             ]
         };
 
