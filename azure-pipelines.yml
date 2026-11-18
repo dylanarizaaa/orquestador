@@ -1,0 +1,33 @@
+trigger:
+  branches:
+    include:
+      - Desarrollo
+      - QA
+      - Produccion
+pr:
+  branches:
+    include:
+      - Desarrollo
+      - QA
+      - Produccion
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  - ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/De') }}:
+      - group: Angular_PortalFinanciero_OrquestadorPrincipal - Desarrollo
+  - ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/QA') }}:
+      - group: Angular_PortalFinanciero_OrquestadorPrincipal - QA
+  - ${{ if startsWith(variables['Build.SourceBranch'], 'refs/heads/Pro') }}:
+      - group: Angular_PortalFinanciero_OrquestadorPrincipal - Produccion
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: servicios/DevOps-ConfiguracionesGenericas
+      ref: refs/heads/Propuesta-DevOps
+      endpoint: DevOpsCrossProjectConnection
+
+stages:
+- template: azure/stages/templates/AngularTemplate.yaml@templates

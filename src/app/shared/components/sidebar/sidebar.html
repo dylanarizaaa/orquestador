@@ -1,0 +1,82 @@
+<div hlmSidebarWrapper sidebarWidth="264px" class="flex-col">
+    <ng-content select="[header]" />
+    <div class="flex flex-1">
+        <hlm-sidebar variant="floating"
+            sidebarContainerClass="top-(--header-height) h-[calc(100svh-var(--header-height))]">
+            <div hlmSidebarContent>
+                @for (item of menu(); track item.title) {
+                @if (item.subItems?.length) {
+                <hlm-collapsible [expanded]="item.expanded ?? false" class="group/collapsible">
+                    <div hlmSidebarGroup>
+                        <button hlmCollapsibleTrigger hlmSidebarGroupLabel
+                            class="hover:bg-sidebar-accent text-sidebar-accent-foreground text-sm">
+                            <div class="flex items-center gap-1">
+                                @if (item.iconSvg) {
+                                <ng-icon hlm [svg]="item.iconSvg" size="24px" class="shrink-0" />
+                                } @else if (item.icon) {
+                                <ng-icon hlm [name]="item.icon" size="24px" class="shrink-0" />
+                                }
+                                <span class="text-start">
+                                    {{ item.title }}
+                                </span>
+                            </div>
+                            <ng-icon hlm name="lucideChevronDown" size="20px"
+                                class="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                        </button>
+                        <hlm-collapsible-content>
+                            <div hlmSidebarGroupContent>
+                                <ul hlmSidebarMenu>
+                                    @for (sub of item.subItems; track sub.title) {
+                                    <li hlmSidebarMenuItem>
+                                        @if (sub.action) {
+                                        <button hlmSidebarMenuButton type="button" (click)="sub.action!()">
+                                            <span>{{ sub.title }}</span>
+                                        </button>
+                                        } @else {
+                                        <a hlmSidebarMenuButton class="[&.active]:bg-sidebar-accent"
+                                            routerLinkActive="active" [routerLink]="sub.route">
+                                            <span>{{ sub.title }}</span>
+                                        </a>
+                                        }
+                                    </li>
+                                    }
+                                </ul>
+                            </div>
+                        </hlm-collapsible-content>
+                    </div>
+                </hlm-collapsible>
+                } @else {
+                <div hlmSidebarGroup>
+                    @if (item.action) {
+                    <button hlmSidebarGroupLabel type="button" (click)="item.action!()"
+                        class="hover:bg-sidebar-accent text-sidebar-accent-foreground text-sm w-full">
+                        <div class="flex items-center gap-1">
+                            @if (item.iconSvg) {
+                            <ng-icon hlm [svg]="item.iconSvg" size="24px" class="shrink-0" />
+                            } @else if (item.icon) {
+                            <ng-icon hlm [name]="item.icon" size="24px" class="shrink-0" />
+                            }
+                            <span class="text-start">{{ item.title }}</span>
+                        </div>
+                    </button>
+                    } @else {
+                    <a hlmSidebarGroupLabel [routerLink]="item.route"
+                        class="hover:bg-sidebar-accent text-sidebar-accent-foreground text-sm">
+                        <div class="flex items-center gap-1">
+                            @if (item.iconSvg) {
+                            <ng-icon hlm [svg]="item.iconSvg" size="24px" class="shrink-0" />
+                            } @else if (item.icon) {
+                            <ng-icon hlm [name]="item.icon" size="24px" class="shrink-0" />
+                            }
+                            <span class="text-start">{{ item.title }}</span>
+                        </div>
+                    </a>
+                    }
+                </div>
+                }
+                }
+            </div>
+        </hlm-sidebar>
+        <ng-content />
+    </div>
+</div>

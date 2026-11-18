@@ -1,0 +1,199 @@
+@layer theme, base, components, utilities;
+
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css';
+
+@import '../libs/brain/hlm-tailwind-preset.css';
+
+@font-face {
+  font-family: "Prospero";
+  src: url("/fonts/Prospero-Extralight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Prospero";
+  src: url("/fonts/Prospero-ExtralightItalic.ttf") format("truetype");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Prospero";
+  src: url("/fonts/Prospero-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Prospero";
+  src: url("/fonts/Prospero-RegularItalic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Prospero";
+  src: url("/fonts/Prospero-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Prospero";
+  src: url("/fonts/Prospero-SemiBoldItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Prospero";
+  src: url("/fonts/Prospero-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Prospero";
+  src: url("/fonts/Prospero-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@custom-variant fixed (&:is(.layout-fixed *));
+
+@theme inline {
+  --font-ar: var(--font-ar);
+  --font-he: var(--font-he);
+  --breakpoint-3xl: 1600px;
+  --breakpoint-4xl: 2000px;
+
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+
+  /* Custom palette colors */
+  --color-acento: #2569B3;
+  --color-acento-inicial: #E8EFF7;
+  --color-terciario: #6E52E1;
+  --color-terciario-inicial: #F0EDFB;
+  --color-verde: #01623D;
+  --color-verde-inicial: #F4FBF8;
+  --color-azul: #035487;
+  --color-azul-inicial: #EDF4F8;
+  --color-ambar: #B37700;
+  --color-ambar-inicial: #F7F1E5;
+  --color-rojo: #A10303;
+  --color-rojo-inicial: #F9EEEE;
+  --color-negro-digital: #212529;
+  --color-gris-oscuro: #575757;
+  --color-gris-medio: #727272;
+  --color-gris-complementario: #929292;
+  --color-gris-rafaga: #E0E0E0;
+  --color-gris-inicial: #F9F9F9;
+  --color-blanco-digital: #FEFEFE;
+  --color-hover: #3B4350;
+
+  --spotlight-gradient: 68.54% 68.72% at 55.02% 31.46%, #d9d9d914 0, #8c8c8c05 50%, #73737300 80%;
+}
+
+:root {
+  color-scheme: light;
+  --font-sans: 'Prospero', sans-serif;
+  --radius: 0.625rem;
+  --background: #FEFEFE;
+  --foreground: #18191A;
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: #FEFEFE;
+  --popover-foreground: #18191A;
+  --primary: #18191A;
+  --primary-foreground: #FEFEFE;
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --tertiary: #6E52E1;
+  --tertiary-foreground: #F0EDFB;
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: #2569B3;
+  --accent-foreground: #E8EFF7;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --sidebar: #FEFEFE;
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: #E0E0E0;
+  --sidebar-accent-foreground: #18191A;
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  --surface: oklch(0.98 0 0);
+  --surface-foreground: var(--foreground);
+
+  --header-height: --spacing(14);
+}
+
+.dark {
+  color-scheme: dark;
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.985 0 0);
+  --sidebar-primary-foreground: oklch(0.205 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+  --surface: oklch(0.2 0 0);
+  --surface-foreground: oklch(0.708 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+[hidden]:where(:not([hidden='until-found'])) {
+  display: none !important;
+}
+
+@utility container-wrapper {
+  @apply 3xl:fixed:max-w-[calc(var(--breakpoint-2xl)+2rem)] mx-auto w-full px-2;
+}
+
+@utility container {
+  @apply 3xl:max-w-screen-2xl mx-auto max-w-[1400px] px-4 lg:px-8;
+}
+
+[data-lang='ar'] {
+  font-family: var(--font-ar);
+}
+
+[data-lang='he'] {
+  font-family: var(--font-he);
+}
